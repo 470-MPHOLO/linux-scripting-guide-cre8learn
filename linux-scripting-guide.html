@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Scripting Guide for RHEL | Cre8Learn Institute</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+        header {
+            border-bottom: 3px solid #4f46e5;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #1e1b4b;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #4f46e5;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        h2 {
+            font-size: 1.4rem;
+            color: #4f46e5;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        h3 {
+            font-size: 1.1rem;
+            color: #1e1b4b;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        p {
+            margin-bottom: 1rem;
+            color: #334155;
+        }
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.4rem;
+            color: #334155;
+        }
+        pre {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1.25rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        code {
+            font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+            background: #f1f5f9;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #be123c;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+            font-size: inherit;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: #f1f5f9;
+            color: #1e1b4b;
+            font-weight: 600;
+        }
+        tr:hover {
+            background: #f8fafc;
+        }
+        .callout {
+            background: #eef2ff;
+            border-left: 4px solid #4f46e5;
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+        .callout strong {
+            color: #4f46e5;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        footer .brand {
+            font-weight: 700;
+            color: #4f46e5;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        footer .pillars {
+            font-style: italic;
+            color: #1e1b4b;
+            margin-bottom: 0.75rem;
+        }
+        .contact-line {
+            margin-top: 0.5rem;
+            line-height: 1.9;
+        }
+        @media (max-width: 640px) {
+            .container { padding: 1.5rem; }
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            pre { font-size: 0.8rem; padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Linux Scripting Guide for RHEL</h1>
+            <div class="subtitle">Cre8Learn Institute &middot; Create. Learn. Innovate.</div>
+        </header>
+
+        <h2>What Is a Shell Script?</h2>
+        <p>A shell script is a text file containing a series of Linux commands that run automatically. Instead of typing commands one by one, you write them once and execute them as a single program.</p>
+        <p>Scripts are used for:</p>
+        <ul>
+            <li>Automating repetitive tasks</li>
+            <li>Managing files and directories</li>
+            <li>Monitoring system health</li>
+            <li>Running backups</li>
+            <li>Deploying applications</li>
+        </ul>
+        <p>On RHEL, the default shell is <strong>Bash</strong> (Bourne Again Shell).</p>
+
+        <h2>Your First Script</h2>
+        <p>Create a file called <code>hello.sh</code>:</p>
+        <pre><code>#!/bin/bash
+# My first script
+echo "Hello, Cre8Learn!"</code></pre>
+        <p><strong>Line 1:</strong> <code>#!/bin/bash</code> is called the <strong>shebang</strong>. It tells Linux to use Bash to run the script. Always include it.</p>
+        <p><strong>Line 2:</strong> A comment. Comments start with <code>#</code> and are ignored.</p>
+        <p><strong>Line 3:</strong> <code>echo</code> prints text to the screen.</p>
+        <p>Make it executable and run it:</p>
+        <pre><code>chmod +x hello.sh
+./hello.sh</code></pre>
+
+        <h2>Variables</h2>
+        <p>Variables store data.</p>
+        <pre><code>#!/bin/bash
+name="Teboho"
+course="Linux"
+echo "Welcome $name to $course"</code></pre>
+        <p>Rules:</p>
+        <ul>
+            <li>No spaces around <code>=</code></li>
+            <li>Use <code>$variable</code> to read the value</li>
+            <li>Use <code>"$variable"</code> in quotes when it might contain spaces</li>
+        </ul>
+        <p><strong>User input:</strong></p>
+        <pre><code>read -p "Enter your name: " username
+echo "Hello, $username"</code></pre>
+        <p><strong>Command output into a variable:</strong></p>
+        <pre><code>today=$(date +%F)
+echo "Today is $today"</code></pre>
+
+        <h2>Conditionals</h2>
+        <p>Use <code>if</code> to make decisions.</p>
+        <pre><code>#!/bin/bash
+read -p "Enter a number: " num
+
+if [ "$num" -gt 10 ]; then
+    echo "Greater than 10"
+elif [ "$num" -eq 10 ]; then
+    echo "Exactly 10"
+else
+    echo "Less than 10"
+fi</code></pre>
+        <p>Common test operators:</p>
+        <table>
+            <thead>
+                <tr><th>Operator</th><th>Meaning</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><code>-eq</code></td><td>equal</td></tr>
+                <tr><td><code>-ne</code></td><td>not equal</td></tr>
+                <tr><td><code>-gt</code></td><td>greater than</td></tr>
+                <tr><td><code>-lt</code></td><td>less than</td></tr>
+                <tr><td><code>-f</code></td><td>file exists</td></tr>
+                <tr><td><code>-d</code></td><td>directory exists</td></tr>
+                <tr><td><code>-z</code></td><td>string is empty</td></tr>
+            </tbody>
+        </table>
+
+        <h2>Loops</h2>
+        <p><strong>For loop</strong> (iterate over a list):</p>
+        <pre><code>#!/bin/bash
+for user in alice bob charlie; do
+    echo "Processing $user"
+done</code></pre>
+        <p><strong>For loop over files:</strong></p>
+        <pre><code>for file in /var/log/*.log; do
+    echo "Log file: $file"
+done</code></pre>
+        <p><strong>While loop</strong> (repeat while a condition is true):</p>
+        <pre><code>#!/bin/bash
+count=1
+while [ $count -le 5 ]; do
+    echo "Count: $count"
+    ((count++))
+done</code></pre>
+
+        <h2>Functions</h2>
+        <p>Functions group commands for reuse.</p>
+        <pre><code>#!/bin/bash
+
+greet() {
+    echo "Hello, $1"
+}
+
+greet "Cre8Learn"
+greet "RHEL Students"</code></pre>
+        <p><code>$1</code> is the first argument passed to the function.</p>
+
+        <h2>Practical Example: System Health Check</h2>
+        <pre><code>#!/bin/bash
+# check_system.sh - basic RHEL health check
+
+echo "===== System Report ====="
+echo "Hostname: $(hostname)"
+echo "Uptime: $(uptime -p)"
+echo "Disk Usage:"
+df -h / | tail -1
+echo "Memory Usage:"
+free -h | grep Mem
+echo "Logged-in Users:"
+who
+echo "========================="</code></pre>
+        <p>Save as <code>check_system.sh</code>, then:</p>
+        <pre><code>chmod +x check_system.sh
+./check_system.sh</code></pre>
+
+        <h2>Debugging Tips</h2>
+        <ul>
+            <li>Run with <code>bash -x script.sh</code> to see each command as it executes.</li>
+            <li>Use <code>echo</code> statements to print variable values.</li>
+            <li>Always test scripts in a safe directory first.</li>
+            <li>Check exit codes with <code>echo $?</code> after a command runs.</li>
+        </ul>
+
+        <h2>Best Practices</h2>
+        <ol>
+            <li>Always start with <code>#!/bin/bash</code>.</li>
+            <li>Comment your code. Future you will thank present you.</li>
+            <li>Quote your variables: <code>"$var"</code> not <code>$var</code>.</li>
+            <li>Use meaningful names: <code>backup_dir</code> not <code>bd</code>.</li>
+            <li>Test before automating anything critical.</li>
+            <li>Keep scripts in one folder, e.g., <code>~/scripts</code>.</li>
+            <li>Use <code>set -e</code> at the top to make the script exit on any error.</li>
+        </ol>
+
+        <h2>Practice Exercises</h2>
+        <ol>
+            <li>Write a script that asks for your name and greets you.</li>
+            <li>Write a script that lists all <code>.txt</code> files in your home directory.</li>
+            <li>Write a script that checks if a file exists and prints a message.</li>
+            <li>Write a script that loops from 1 to 10 and prints only even numbers.</li>
+            <li>Write a script that backs up <code>/etc</code> to <code>/tmp/etc_backup</code>.</li>
+        </ol>
+
+        <footer>
+            <div class="brand">Cre8Learn Institute</div>
+            <div class="pillars">Create. Learn. Innovate.</div>
+            <div class="contact-line">
+                📧 cre8learn_institute@outlook.com<br>
+                📞 Calls: 56124951 (most active on calls)<br>
+                💬 WhatsApp: 63608813 or 62882735
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
